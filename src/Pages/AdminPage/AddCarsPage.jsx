@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import NavbarAdmin from "../../Components/Header/NavbarAdmin";
 import SideNavbarAdmin from "../../Components/Header/SideNavbarAdmin";
 const AddCarsPage = () => {
@@ -164,8 +165,8 @@ const AddCarsPage = () => {
                       className="button mt-4 d-flex justify-content-between"
                       style={{ fontSize: "14px", width: "160px" }}
                     >
-                      <a
-                        href="/cars"
+                      <Link
+                        to="/admin/cars"
                         className="d-flex justify-content-center align-items-center"
                         style={{
                           border: "1px solid #0D28A6",
@@ -177,7 +178,7 @@ const AddCarsPage = () => {
                         }}
                       >
                         <p className="m-0 p-0">Cancel</p>
-                      </a>
+                      </Link>
                       <button
                         type="submit"
                         style={{

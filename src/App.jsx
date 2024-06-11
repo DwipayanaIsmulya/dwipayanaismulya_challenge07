@@ -7,6 +7,7 @@ import CarsPage from "./Pages/AdminPage/CarsPage";
 import DashboardPage from "./Pages/AdminPage/DashboardPage";
 import AddCarsPage from "./Pages/AdminPage/AddCarsPage";
 import EditCarsPage from "./Pages/AdminPage/EditCarsPage";
+import LoginPage from "./Pages/Auth/LoginPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/cars" element={<SearchCarsPage />} />
 
           {/* Auth */}
+          <Route path="/admin/login" element={<LoginPage />} />
 
           {/* Admin */}
           <Route path="/admin/cars" element={<CarsPage />} />

@@ -1,6 +1,26 @@
+import { useEffect, useState } from "react";
 import NavbarAdmin from "../../Components/Header/NavbarAdmin";
 import SideNavbarAdmin from "../../Components/Header/SideNavbarAdmin";
 const DashboardPage = () => {
+  const [cars, setCars] = useState([]);
+  let noCar = 1;
+
+  useEffect(() => {
+    // memanggil API untuk mengambil data todos
+    fetch("http://localhost:8000/cars")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        // ketika Rest API sukses, simpan data dari response ke dalam state lokal
+        setCars(data);
+      })
+      .catch((err) => {
+        if (err.name === "AbortError") {
+          console.log("fetch aborted.");
+        }
+      });
+  }, []);
   return (
     <>
       <div className="container-fluid mx-0 px-0">
@@ -47,7 +67,6 @@ const DashboardPage = () => {
                 style={{
                   backgroundColor: "#f3f3f3",
                   width: "100%",
-                  height: "100vh",
                 }}
               >
                 <div className="row px-3">
@@ -104,8 +123,11 @@ const DashboardPage = () => {
                         >
                           <th>No</th>
                           <th>Model</th>
-                          <th>Size</th>
+                          <th>Manufacture</th>
+                          <th>Type</th>
+                          <th>Capacity</th>
                           <th>RentPerDay</th>
+                          <th>Year</th>
                         </tr>
                       </thead>
                       <tbody
@@ -115,12 +137,17 @@ const DashboardPage = () => {
                           color: "#000000",
                         }}
                       >
-                        <tr className="align-middle">
-                          <td>index + 1 </td>
-                          <td>row.model </td>
-                          <td>row.size </td>
-                          <td>row.rentPerDay </td>
-                        </tr>
+                        {cars.map((car) => (
+                          <tr className="align-middle" key={car.id}>
+                            <td>{noCar++}</td>
+                            <td>{car.model}</td>
+                            <td>{car.manufacture}</td>
+                            <td>{car.type}</td>
+                            <td>{car.capacity}</td>
+                            <td>{car.rentPerDay}</td>
+                            <td>{car.year}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
