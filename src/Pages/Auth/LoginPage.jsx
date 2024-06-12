@@ -1,4 +1,5 @@
 // assets
+import { Link } from "react-router-dom";
 import imgBanner from "../../assets/image2.png";
 
 const LoginPage = () => {
@@ -38,7 +39,7 @@ const LoginPage = () => {
                   Welcome, Admin BCR
                 </h1>
 
-                <div
+                {/* <div
                   className="my-2 d-flex justify-content-center align-items-center flex-column"
                   style={{
                     height: "60px",
@@ -54,7 +55,7 @@ const LoginPage = () => {
                   <p className="m-0 p-0">
                     Perhatikan penggunaan huruf kapital.
                   </p>
-                </div>
+                </div> */}
 
                 <div className="col-sm p-0 m-1 d-flex flex-column">
                   <label
@@ -91,7 +92,8 @@ const LoginPage = () => {
                   style={{ width: "92px" }}
                 >
                   <p className="mb-2">&nbsp;</p>
-                  <button
+                  <Link
+                    to={"/admin"}
                     className="btn submit"
                     style={{
                       backgroundColor: "#0D28A6",
@@ -104,7 +106,7 @@ const LoginPage = () => {
                     }}
                   >
                     Sign In
-                  </button>
+                  </Link>
                 </div>
               </form>
             </div>

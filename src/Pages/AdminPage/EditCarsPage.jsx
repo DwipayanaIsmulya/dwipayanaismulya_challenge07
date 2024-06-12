@@ -1,7 +1,63 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import NavbarAdmin from "../../Components/Header/NavbarAdmin";
 import SideNavbarAdmin from "../../Components/Header/SideNavbarAdmin";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 const EditCarsPage = () => {
+  const [model, setModel] = useState("");
+  const [manufacture, setManufacture] = useState("");
+  const [type, setType] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [rentPerDay, setRentPerDay] = useState("");
+  const [year, setYear] = useState("");
+
+  const { carsId } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // memanggil API untuk mengambil data todos
+    fetch("http://localhost:8000/cars/" + carsId)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        // ketika Rest API sukses, simpan data dari response ke dalam state lokal
+        console.log(data);
+        setModel(data.model);
+        setManufacture(data.manufacture);
+        setType(data.type);
+        setCapacity(data.capacity);
+        setRentPerDay(data.rentPerDay);
+        setYear(data.year);
+      })
+      .catch((err) => {
+        if (err.name === "AbortError") {
+          console.log("fetch aborted.");
+        }
+      });
+  }, [carsId]);
+
+  const updateCars = () => {
+    const newCar = { model, manufacture, type, capacity, rentPerDay, year };
+
+    fetch("http://localhost:8000/cars/" + carsId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCar),
+    }).then(() => {
+      // ketika sukses menambah data, reset form dengan mengeset state title menjadi empty string
+      setType("");
+      setRentPerDay("");
+      setModel("");
+      setManufacture("");
+      setCapacity("");
+      setYear("");
+    });
+    navigate("/admin/cars");
+  };
+
   return (
     <>
       <div className="container-fluid mx-0 px-0">
@@ -76,9 +132,6 @@ const EditCarsPage = () => {
                   style={{ backgroundColor: "#fff" }}
                 >
                   <form
-                    action="/cars"
-                    method="post"
-                    encType="multipart/form-data"
                     className="d-flex flex-column p-4"
                     style={{
                       fontSize: "12px",
@@ -87,13 +140,52 @@ const EditCarsPage = () => {
                     }}
                   >
                     <div
+                      className=" d-flex justify-content-between align-items-center my-1"
+                      style={{ width: "450px" }}
+                    >
+                      <label className="m-0 p-0">Model</label>
+                      <input
+                        id="model"
+                        value={model}
+                        onChange={(e) => setModel(e.target.value)}
+                        className="px-2 input"
+                        type="text"
+                        style={{
+                          width: "300px",
+                          height: "36px",
+                          border: "1px solid #D0D0D0",
+                        }}
+                        placeholder="F015"
+                      />
+                    </div>
+                    <div
+                      className=" d-flex justify-content-between align-items-center my-1"
+                      style={{ width: "450px" }}
+                    >
+                      <label className="m-0 p-0">Manufacture</label>
+                      <input
+                        id="manufacture"
+                        value={manufacture}
+                        onChange={(e) => setManufacture(e.target.value)}
+                        className="px-2 input"
+                        type="text"
+                        style={{
+                          width: "300px",
+                          height: "36px",
+                          border: "1px solid #D0D0D0",
+                        }}
+                        placeholder="Ford"
+                      />
+                    </div>
+                    <div
                       className="nama d-flex justify-content-between align-items-center my-1"
                       style={{ width: "450px" }}
                     >
-                      <label className="m-0 p-0">Name</label>
+                      <label className="m-0 p-0">Type</label>
                       <input
-                        id="name"
-                        name="model"
+                        id="type"
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
                         className="px-2 input"
                         type="text"
                         style={{
@@ -108,10 +200,30 @@ const EditCarsPage = () => {
                       className="rentPerDay d-flex justify-content-between align-items-center my-1"
                       style={{ width: "450px" }}
                     >
+                      <label className="m-0 p-0">Capacity</label>
+                      <input
+                        id="capacity"
+                        value={capacity}
+                        onChange={(e) => setCapacity(e.target.value)}
+                        className="px-2 input"
+                        type="text"
+                        style={{
+                          width: "300px",
+                          height: "36px",
+                          border: "1px solid #D0D0D0",
+                        }}
+                        placeholder="4"
+                      />
+                    </div>
+                    <div
+                      className="rentPerDay d-flex justify-content-between align-items-center my-1"
+                      style={{ width: "450px" }}
+                    >
                       <label className="m-0 p-0">Rent Per Day</label>
                       <input
                         id="rentPerDay"
-                        name="rentPerDay"
+                        value={rentPerDay}
+                        onChange={(e) => setRentPerDay(e.target.value)}
                         className="px-2 input"
                         type="text"
                         style={{
@@ -123,24 +235,23 @@ const EditCarsPage = () => {
                       />
                     </div>
                     <div
-                      className="size d-flex justify-content-between align-items-center my-1"
+                      className="rentPerDay d-flex justify-content-between align-items-center my-1"
                       style={{ width: "450px" }}
                     >
-                      <label className="m-0 p-0">Size</label>
-                      <select
-                        className="px-2 input form-control-md"
-                        name="size"
-                        id="size"
+                      <label className="m-0 p-0">Year</label>
+                      <input
+                        id="year"
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
+                        className="px-2 input"
+                        type="text"
                         style={{
                           width: "300px",
                           height: "36px",
                           border: "1px solid #D0D0D0",
                         }}
-                      >
-                        <option value="Small">Small</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Large">Large</option>
-                      </select>
+                        placeholder="2024"
+                      />
                     </div>
                     <div
                       className="file d-flex justify-content-between align-items-center my-1"
@@ -179,7 +290,7 @@ const EditCarsPage = () => {
                         <p className="m-0 p-0">Cancel</p>
                       </Link>
                       <button
-                        type="submit"
+                        onClick={updateCars}
                         style={{
                           border: "none",
                           color: "#fff",

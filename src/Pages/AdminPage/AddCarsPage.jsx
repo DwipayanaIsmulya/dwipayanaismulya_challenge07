@@ -1,7 +1,39 @@
 import { Link } from "react-router-dom";
 import NavbarAdmin from "../../Components/Header/NavbarAdmin";
 import SideNavbarAdmin from "../../Components/Header/SideNavbarAdmin";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const AddCarsPage = () => {
+  const navigate = useNavigate();
+
+  const [model, setModel] = useState("");
+  const [manufacture, setManufacture] = useState("");
+  const [type, setType] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [rentPerDay, setRentPerDay] = useState("");
+  const [year, setYear] = useState("");
+
+  // add cars
+  const addCars = () => {
+    const newCar = { model, manufacture, type, capacity, rentPerDay, year };
+
+    fetch("http://localhost:8000/cars", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCar),
+    }).then(() => {
+      // ketika sukses menambah data, reset form dengan mengeset state title menjadi empty string
+      setType("");
+      setRentPerDay("");
+      setModel("");
+      setManufacture("");
+      setCapacity("");
+      setYear("");
+    });
+    navigate("/admin/cars");
+  };
   return (
     <>
       <div className="container-fluid mx-0 px-0">
@@ -77,9 +109,7 @@ const AddCarsPage = () => {
                   style={{ backgroundColor: "#fff" }}
                 >
                   <form
-                    action="/cars"
-                    method="post"
-                    encType="multipart/form-data"
+                    // action="/admin/cars"
                     className="d-flex flex-column p-4"
                     style={{
                       fontSize: "12px",
@@ -88,13 +118,52 @@ const AddCarsPage = () => {
                     }}
                   >
                     <div
+                      className=" d-flex justify-content-between align-items-center my-1"
+                      style={{ width: "450px" }}
+                    >
+                      <label className="m-0 p-0">Model</label>
+                      <input
+                        id="model"
+                        value={model}
+                        onChange={(e) => setModel(e.target.value)}
+                        className="px-2 input"
+                        type="text"
+                        style={{
+                          width: "300px",
+                          height: "36px",
+                          border: "1px solid #D0D0D0",
+                        }}
+                        placeholder="F015"
+                      />
+                    </div>
+                    <div
+                      className=" d-flex justify-content-between align-items-center my-1"
+                      style={{ width: "450px" }}
+                    >
+                      <label className="m-0 p-0">Manufacture</label>
+                      <input
+                        id="manufacture"
+                        value={manufacture}
+                        onChange={(e) => setManufacture(e.target.value)}
+                        className="px-2 input"
+                        type="text"
+                        style={{
+                          width: "300px",
+                          height: "36px",
+                          border: "1px solid #D0D0D0",
+                        }}
+                        placeholder="Ford"
+                      />
+                    </div>
+                    <div
                       className="nama d-flex justify-content-between align-items-center my-1"
                       style={{ width: "450px" }}
                     >
-                      <label className="m-0 p-0">Name</label>
+                      <label className="m-0 p-0">Type</label>
                       <input
-                        id="name"
-                        name="model"
+                        id="type"
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
                         className="px-2 input"
                         type="text"
                         style={{
@@ -109,10 +178,30 @@ const AddCarsPage = () => {
                       className="rentPerDay d-flex justify-content-between align-items-center my-1"
                       style={{ width: "450px" }}
                     >
+                      <label className="m-0 p-0">Capacity</label>
+                      <input
+                        id="capacity"
+                        value={capacity}
+                        onChange={(e) => setCapacity(e.target.value)}
+                        className="px-2 input"
+                        type="text"
+                        style={{
+                          width: "300px",
+                          height: "36px",
+                          border: "1px solid #D0D0D0",
+                        }}
+                        placeholder="4"
+                      />
+                    </div>
+                    <div
+                      className="rentPerDay d-flex justify-content-between align-items-center my-1"
+                      style={{ width: "450px" }}
+                    >
                       <label className="m-0 p-0">Rent Per Day</label>
                       <input
                         id="rentPerDay"
-                        name="rentPerDay"
+                        value={rentPerDay}
+                        onChange={(e) => setRentPerDay(e.target.value)}
                         className="px-2 input"
                         type="text"
                         style={{
@@ -124,6 +213,26 @@ const AddCarsPage = () => {
                       />
                     </div>
                     <div
+                      className="rentPerDay d-flex justify-content-between align-items-center my-1"
+                      style={{ width: "450px" }}
+                    >
+                      <label className="m-0 p-0">Year</label>
+                      <input
+                        id="year"
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
+                        className="px-2 input"
+                        type="text"
+                        style={{
+                          width: "300px",
+                          height: "36px",
+                          border: "1px solid #D0D0D0",
+                        }}
+                        placeholder="2024"
+                      />
+                    </div>
+
+                    {/* <div
                       className="size d-flex justify-content-between align-items-center my-1"
                       style={{ width: "450px" }}
                     >
@@ -142,7 +251,7 @@ const AddCarsPage = () => {
                         <option value="Medium">Medium</option>
                         <option value="Large">Large</option>
                       </select>
-                    </div>
+                    </div> */}
                     <div
                       className="file d-flex justify-content-between align-items-center my-1"
                       style={{ width: "450px" }}
@@ -180,7 +289,7 @@ const AddCarsPage = () => {
                         <p className="m-0 p-0">Cancel</p>
                       </Link>
                       <button
-                        type="submit"
+                        onClick={addCars}
                         style={{
                           border: "none",
                           color: "#fff",

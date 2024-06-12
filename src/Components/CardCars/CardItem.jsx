@@ -1,9 +1,20 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 // assets
 import imgCar from "../../assets/image1.png";
 const CardItem = ({ car }) => {
+  const navigate = useNavigate();
+
+  const deleteCar = () => {
+    fetch("http://localhost:8000/cars/" + car.id, {
+      method: "DELETE",
+    }).then(() => {
+      console.log("todo deleted.");
+      navigate("/admin/cars");
+    });
+  };
   return (
     <div
       className="card d-flex flex-column p-4 m-2"
@@ -49,9 +60,9 @@ const CardItem = ({ car }) => {
         className="action d-flex justify-content-between align-items-center mt-2"
         style={{ fontSize: "14px" }}
       >
-        <a
-          href=""
-          className="d-flex justify-content-center align-items-center "
+        <form
+          action=""
+          className="d-flex justify-content-center align-items-center"
           style={{
             border: "1px solid #FA2C5A",
             color: "#FA2C5A",
@@ -61,12 +72,26 @@ const CardItem = ({ car }) => {
             backgroundColor: "#fff",
           }}
         >
-          <img className="mx-1" src="./assets/fi_trash-2.png" alt="" />
-          <p className="mx-1 my-0 p-0">Delete</p>
-        </a>
+          <button
+            onClick={deleteCar}
+            className="d-flex justify-content-center align-items-center "
+            style={{
+              border: "none",
+              color: "#FA2C5A",
+              height: "100%",
+              width: "100%",
+              fontWeight: "700",
+
+              backgroundColor: "#fff",
+            }}
+          >
+            <img className="mx-1" src="./assets/fi_trash-2.png" alt="" />
+            <p className="mx-1 my-0 p-0">Delete</p>
+          </button>
+        </form>
 
         <Link
-          to="/admin/edit"
+          to={"/admin/edit/" + car.id}
           className="d-flex justify-content-center align-items-center"
           style={{
             backgroundColor: "#5CB85F",

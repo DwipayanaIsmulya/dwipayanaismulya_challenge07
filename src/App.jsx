@@ -26,7 +26,7 @@ function App() {
           <Route path="/admin/cars" element={<CarsPage />} />
           <Route path="/admin/" element={<DashboardPage />} />
           <Route path="/admin/add" element={<AddCarsPage />} />
-          <Route path="/admin/edit" element={<EditCarsPage />} />
+          <Route path="/admin/edit/:carsId" element={<EditCarsPage />} />
 
           {/* The page for not found url path */}
           <Route
