@@ -59,7 +59,7 @@ const AddCarsPage = () => {
             <div className="container-fluid mx-0 px-0 d-flex">
               <div
                 className="d-flex flex-column"
-                style={{ width: "250px", height: "100%" }}
+                style={{ width: "250px", height: "100vh" }}
               >
                 <a
                   href=""
@@ -261,7 +261,7 @@ const AddCarsPage = () => {
                         <option value="Large">Large</option>
                       </select>
                     </div> */}
-                    <div
+                    {/* <div
                       className="file d-flex justify-content-between align-items-center my-1"
                       style={{ width: "450px" }}
                     >
@@ -278,7 +278,7 @@ const AddCarsPage = () => {
                         }}
                         placeholder="Foto.jpg"
                       />
-                    </div>
+                    </div> */}
                     <div
                       className="button mt-4 d-flex justify-content-between"
                       style={{ fontSize: "14px", width: "160px" }}
