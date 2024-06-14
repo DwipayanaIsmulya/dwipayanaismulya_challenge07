@@ -89,3 +89,44 @@
     font-size: 18px;
   }
 }
+
+.swal2-actions .swal2-cancel {
+  color: #0D28A6;
+  border: 1px solid #0D28A6;
+}
+
+.swal2-container .delete-show {
+  width: 150px;
+  height: 120px;
+  border-radius: 0;
+  border: none;
+  background-image: url(/src/assets/img-BeepBeep.png);
+  background-position: center;
+  background-size: cover;
+}
+
+.delete-show .swal2-icon-content {
+  display: none;
+}
+
+.container-loader {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  margin: auto;
+  border: 20px solid #EAF0F6;
+  border-radius: 50%;
+  border-top: 20px solid #0D28A6;
+  width: 200px;
+  height: 200px;
+  animation: spinner 4s linear infinite;
+}
+@keyframes spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -1,4 +1,27 @@
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const NavbarAdmin = () => {
+  const navigate = useNavigate();
+
+  const logoutButton = () => {
+    localStorage.removeItem("token");
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Logout successfully",
+    });
+    navigate("/admin/login");
+  };
   return (
     <div
       className="d-flex align-items-center justify-content-between"
@@ -46,12 +69,21 @@ const NavbarAdmin = () => {
         </div>
         <div className="profile mx-2 d-flex align-items-center justify-content-between">
           <img className="mx-1" src="/assets/profile.png" alt="" />
-          <p
+          <button
+            onClick={logoutButton}
             className="m-0 p-0"
-            style={{ fontSize: "14px", fontWeight: "600" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "700",
+              color: "#fff",
+              backgroundColor: "#0D28A6",
+              width: "80px",
+              height: "35px",
+              borderRadius: "5px",
+            }}
           >
-            Unis Badri
-          </p>
+            Keluar
+          </button>
         </div>
       </div>
     </div>

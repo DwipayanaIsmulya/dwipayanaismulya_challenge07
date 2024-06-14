@@ -1,18 +1,43 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // assets
 import imgCar from "../../assets/image1.png";
 const CardItem = ({ car }) => {
   const navigate = useNavigate();
 
-  const deleteCar = () => {
-    fetch("http://localhost:8000/cars/" + car.id, {
-      method: "DELETE",
-    }).then(() => {
-      console.log("todo deleted.");
-      navigate("/admin/cars");
+  const deleteCar = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: "Menghapus Data Mobil",
+      text: "Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#0D28A6",
+      cancelButtonColor: "#FFFFFF",
+      confirmButtonText: "Ya",
+      cancelButtonText: "Tidak",
+      showClass: {
+        icon: "delete-show",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Data telah terhapus!",
+          icon: "success",
+          showConfirmButton: false,
+        });
+        fetch("http://localhost:8000/cars/" + car.id, {
+          method: "DELETE",
+        }).then(() => {
+          setTimeout(() => {
+            navigate(0);
+          }, 1200);
+        });
+      }
     });
   };
   return (
@@ -99,6 +124,7 @@ const CardItem = ({ car }) => {
             height: "48px",
             fontWeight: "700",
             width: "48%",
+            textDecoration: "none",
           }}
         >
           <img className="mx-1" src="./assets/fi_edit.png" alt="" />

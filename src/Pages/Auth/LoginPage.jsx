@@ -1,8 +1,41 @@
 // assets
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import imgBanner from "../../assets/image2.png";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const LoginPage = () => {
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [isFalse, setIsFalse] = useState("");
+
+  const navigate = useNavigate();
+
+  const LoginButton = (e) => {
+    e.preventDefault();
+    if (name === "admin@gmail.com" && password === "123456") {
+      localStorage.setItem("token", "eyJknaskf009wjd09j0j1d09wjdalkdnq1w01dp");
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Signed in successfully",
+      });
+      setIsFalse("");
+      navigate("/admin/");
+    } else {
+      setIsFalse("true");
+    }
+  };
   return (
     <div className="container-fluid bg-primary">
       <div className="" style={{ width: "100%", height: "100%" }}>
@@ -38,24 +71,27 @@ const LoginPage = () => {
                 >
                   Welcome, Admin BCR
                 </h1>
-
-                {/* <div
-                  className="my-2 d-flex justify-content-center align-items-center flex-column"
-                  style={{
-                    height: "60px",
-                    backgroundColor: "#D00C1A1A",
-                    color: "#D00C1A",
-                    fontSize: "12px",
-                    fontWeight: "300",
-                  }}
-                >
-                  <p className="m-0 p-0">
-                    Masukkan username dan password yang benar.{" "}
-                  </p>
-                  <p className="m-0 p-0">
-                    Perhatikan penggunaan huruf kapital.
-                  </p>
-                </div> */}
+                {isFalse ? (
+                  <div
+                    className="my-2 d-flex justify-content-center align-items-center flex-column"
+                    style={{
+                      height: "60px",
+                      backgroundColor: "#D00C1A1A",
+                      color: "#D00C1A",
+                      fontSize: "12px",
+                      fontWeight: "300",
+                    }}
+                  >
+                    <p className="m-0 p-0">
+                      Masukkan username dan password yang benar.{" "}
+                    </p>
+                    <p className="m-0 p-0">
+                      Perhatikan penggunaan huruf kapital.
+                    </p>
+                  </div>
+                ) : (
+                  <></>
+                )}
 
                 <div className="col-sm p-0 m-1 d-flex flex-column">
                   <label
@@ -69,6 +105,8 @@ const LoginPage = () => {
                     className="input-form px-3"
                     type="email"
                     name="email"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Contoh: johndee@gmail.com"
                   />
                 </div>
@@ -84,6 +122,8 @@ const LoginPage = () => {
                     className="input-form px-3"
                     type="password"
                     name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="6+ karakter"
                   />
                 </div>
@@ -92,8 +132,8 @@ const LoginPage = () => {
                   style={{ width: "92px" }}
                 >
                   <p className="mb-2">&nbsp;</p>
-                  <Link
-                    to={"/admin"}
+                  <button
+                    onClick={LoginButton}
                     className="btn submit"
                     style={{
                       backgroundColor: "#0D28A6",
@@ -106,7 +146,7 @@ const LoginPage = () => {
                     }}
                   >
                     Sign In
-                  </Link>
+                  </button>
                 </div>
               </form>
             </div>

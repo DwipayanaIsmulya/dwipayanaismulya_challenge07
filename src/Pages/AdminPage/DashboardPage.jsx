@@ -21,6 +21,15 @@ const DashboardPage = () => {
         }
       });
   }, []);
+
+  if (cars.length === 0) {
+    return (
+      <div className="container-loader">
+        <div className="loader"></div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="container-fluid mx-0 px-0">
@@ -45,6 +54,7 @@ const DashboardPage = () => {
                     fontSize: "14px",
                     fontWeight: "700",
                     color: "#8A8A8A",
+                    textDecoration: "none",
                   }}
                 >
                   DASHBOARD
@@ -57,6 +67,7 @@ const DashboardPage = () => {
                     fontWeight: "700",
                     color: "#151515",
                     backgroundColor: "#CFD4ED",
+                    textDecoration: "none",
                   }}
                 >
                   Dashboard

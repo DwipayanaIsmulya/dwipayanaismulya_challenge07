@@ -35,7 +35,7 @@ const SideNavbarAdmin = () => {
         <Link
           to="/admin"
           className="d-flex flex-column justify-content-center align-items-center"
-          style={{ color: "#fff" }}
+          style={{ color: "#fff", textDecoration: "none" }}
         >
           <img src={fiHome} width="22" alt="" />
           <p className="mt-1 my-0">Dashboard</p>
@@ -45,7 +45,7 @@ const SideNavbarAdmin = () => {
         <Link
           to="/admin/cars"
           className="d-flex flex-column justify-content-center align-items-center"
-          style={{ color: "#fff" }}
+          style={{ color: "#fff", textDecoration: "none" }}
         >
           <img src={fiTruck} width="22" alt="" />
           <p className="mt-1 my-0">Cars</p>

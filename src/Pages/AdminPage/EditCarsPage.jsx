@@ -3,6 +3,7 @@ import NavbarAdmin from "../../Components/Header/NavbarAdmin";
 import SideNavbarAdmin from "../../Components/Header/SideNavbarAdmin";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const EditCarsPage = () => {
   const [model, setModel] = useState("");
   const [manufacture, setManufacture] = useState("");
@@ -37,7 +38,8 @@ const EditCarsPage = () => {
       });
   }, [carsId]);
 
-  const updateCars = () => {
+  const updateCars = (e) => {
+    e.preventDefault();
     const newCar = { model, manufacture, type, capacity, rentPerDay, year };
 
     fetch("http://localhost:8000/cars/" + carsId, {
@@ -54,6 +56,12 @@ const EditCarsPage = () => {
       setManufacture("");
       setCapacity("");
       setYear("");
+      Swal.fire({
+        title: "Success!",
+        text: "Cars Updated!",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
     });
     navigate("/admin/cars");
   };
@@ -285,6 +293,7 @@ const EditCarsPage = () => {
                           height: "36px",
                           backgroundColor: "#fff",
                           fontWeight: "700",
+                          textDecoration: "none",
                         }}
                       >
                         <p className="m-0 p-0">Cancel</p>

@@ -9,6 +9,9 @@ import AddCarsPage from "./Pages/AdminPage/AddCarsPage";
 import EditCarsPage from "./Pages/AdminPage/EditCarsPage";
 import LoginPage from "./Pages/Auth/LoginPage";
 
+// Protected
+import Protected from "./Components/Protected/Protected";
+
 function App() {
   return (
     <>
@@ -23,10 +26,38 @@ function App() {
           <Route path="/admin/login" element={<LoginPage />} />
 
           {/* Admin */}
-          <Route path="/admin/cars" element={<CarsPage />} />
-          <Route path="/admin/" element={<DashboardPage />} />
-          <Route path="/admin/add" element={<AddCarsPage />} />
-          <Route path="/admin/edit/:carsId" element={<EditCarsPage />} />
+          <Route
+            path="/admin/cars"
+            element={
+              <Protected>
+                <CarsPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin/"
+            element={
+              <Protected>
+                <DashboardPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin/add"
+            element={
+              <Protected>
+                <AddCarsPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin/edit/:carsId"
+            element={
+              <Protected>
+                <EditCarsPage />
+              </Protected>
+            }
+          />
 
           {/* The page for not found url path */}
           <Route

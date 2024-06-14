@@ -1,76 +1,13 @@
 {
   "cars": [
     {
-      "model": "F1505",
-      "manufacture": "Fords",
-      "type": "Sedan",
-      "capacity": 2,
-      "rentPerDay": 200000,
-      "year": 2022,
-      "id": "6e2bc663-5197-441a-957b-bc75e4a2da7c"
-    },
-    {
-      "id": "9ff03bbc-b18c-4ba7-8f3a-4c4b5c2f6c77",
-      "plate": "WXB-3984",
-      "manufacture": "BMW",
-      "model": "X5",
-      "image": "./images/car02.min.jpg",
-      "rentPerDay": 800000,
-      "capacity": 6,
-      "description": " Rear passenger map pockets. Electrochromic rearview mirror. Dual chrome exhaust tips. Locking glove box.",
-      "availableAt": "2022-03-23T15:49:05.563Z",
-      "transmission": "Automatic",
-      "available": false,
-      "type": "Convertible",
-      "year": 2019,
-      "options": [
-        "Keyless Entry",
-        "Power Windows",
-        "MP3 (Single Disc)",
-        "CD (Multi Disc)",
-        "Navigation"
-      ],
-      "specs": [
-        "Rear passenger map pockets",
-        "Electrochromic rearview mirror",
-        "Dual chrome exhaust tips",
-        "Locking glove box",
-        "Pwr front vented disc/rear drum brakes"
-      ]
-    },
-    {
-      "id": "bf6b5c43-1377-4ae0-8908-310c64266f81",
-      "plate": "OSL-4224",
-      "manufacture": "Lincoln",
       "model": "MKZ",
-      "image": "./images/car03.min.jpg",
-      "rentPerDay": 900000,
-      "capacity": 6,
-      "description": " Driver & front passenger map pockets. Direct-type tire pressure monitor system. Cargo area lamp. Glove box lamp.",
-      "availableAt": "2022-03-23T15:49:05.563Z",
-      "transmission": "Automanual",
-      "available": true,
+      "manufacture": "Lincoln",
       "type": "Sedan",
+      "capacity": 6,
+      "rentPerDay": 900000,
       "year": 2021,
-      "options": [
-        "Bucket Seats",
-        "Airbag: Passenger",
-        "Airbag: Driver",
-        "Power Seats",
-        "Airbag: Side",
-        "Antilock Brakes",
-        "CD (Multi Disc)"
-      ],
-      "specs": [
-        "Driver & front passenger map pockets",
-        "Direct-type tire pressure monitor system",
-        "Cargo area lamp",
-        "Glove box lamp",
-        "Silver finish interior door handles",
-        "Driver & front passenger advanced multistage airbags w/occupant sensors",
-        "Silver accent IP trim finisher -inc: silver shifter finisher",
-        "Fasten seat belt warning light/chime"
-      ]
+      "id": "bf6b5c43-1377-4ae0-8908-310c64266f81"
     },
     {
       "id": "5b67f1d7-92d4-41c7-8577-4435740aadf1",
@@ -781,15 +718,6 @@
         "Remote fuel lid release",
         "Traveler/mini trip computer"
       ]
-    },
-    {
-      "model": "X2M05S",
-      "manufacture": "Ford",
-      "type": "Sedan",
-      "capacity": "2",
-      "rentPerDay": "250000",
-      "year": "2025",
-      "id": "f7da"
     }
   ]
 }
